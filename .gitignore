@@ -1,1 +1,3 @@
-docker/ny_taxi_postgres_data/ 
+docker/ny_taxi_postgres_data/
+terraform/.terraform/
+terraform/.terraform.lock.hcl/
