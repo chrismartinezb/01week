@@ -49,7 +49,7 @@ docker run -it \
   taxi_ingest:v001 \
   --user=root \
   --password=root \
-  --host=pgdatabase \
+  --host=pgdatabase \git
   --port=5432 \
   --db=ny_taxi \
   --table_name=look_up_zone \
