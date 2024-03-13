@@ -15,8 +15,8 @@ def main(params):
     port = params.port
     db = params.db
     table_name = params.table_name
-    url = params.url
-    file_name = 'output.parquet'
+    file_url = params.url
+    filename = 'output_file'  # A generic name for the downloaded file
 
     # Determine file extension and set the appropriate pandas read function
     file_ext = file_url.split('.')[-1].lower()
@@ -35,10 +35,6 @@ def main(params):
     engine = create_engine(f'postgresql://{user}:{password}@{host}:{port}/{db}')
 
     df = read_func(filename)
-
-    engine = create_engine(f'postgresql://{user}:{password}@{host}:{port}/{db}')
-
-    df = pd.read_parquet(file_name)
 
     print('Schema created')
     df.head(0).to_sql(name=table_name, con=engine, if_exists='replace')
