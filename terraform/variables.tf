@@ -20,7 +20,7 @@ variable "region" {
 variable "location" {
   description = "Project Location"
   #Update the below to your desired location
-  default     = "europe-west1-c"
+  default     = "EU"
 }
 
 variable "bq_dataset_name" {
@@ -32,7 +32,7 @@ variable "bq_dataset_name" {
 variable "gcs_bucket_name" {
   description = "My Storage Bucket Name"
   #Update the below to a unique bucket name
-  default     = "terraform-demo-terra-bucket"
+  default     = "terraform-test-416911"
 }
 
 variable "gcs_storage_class" {
