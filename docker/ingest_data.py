@@ -16,14 +16,29 @@ def main(params):
     db = params.db
     table_name = params.table_name
     url = params.url
-    parquet_name = 'output.parquet'
+    file_name = 'output.parquet'
+
+    # Determine file extension and set the appropriate pandas read function
+    file_ext = file_url.split('.')[-1].lower()
+    if file_ext in ['parquet']:
+        read_func = pd.read_parquet
+        filename += '.parquet'
+    elif file_ext in ['csv']:
+        read_func = pd.read_csv
+        filename += '.csv'
+    else:
+        raise ValueError(f"Unsupported file format: {file_ext}")
 
     print('Initialize data download from source')
-    os.system(f'wget {url} -O {parquet_name}')
+    os.system(f'wget {file_url} -O {filename}')
 
     engine = create_engine(f'postgresql://{user}:{password}@{host}:{port}/{db}')
 
-    df = pd.read_parquet(parquet_name)
+    df = read_func(filename)
+
+    engine = create_engine(f'postgresql://{user}:{password}@{host}:{port}/{db}')
+
+    df = pd.read_parquet(file_name)
 
     print('Schema created')
     df.head(0).to_sql(name=table_name, con=engine, if_exists='replace')

@@ -43,3 +43,14 @@ docker run -it \
   --url=${URL}
 
 export GOOGLE_APPLICATION_CREDENTIALS=~/.gc/ny-taxi.json
+
+docker run -it \
+  --network=docker_pg-network \
+  taxi_ingest:v001 \
+  --user=root \
+  --password=root \
+  --host=pgdatabase \
+  --port=5432 \
+  --db=ny_taxi \
+  --table_name=green_taxi_trips \
+  --url=https://d37ci6vzurychx.cloudfront.net/trip-data/green_tripdata_2019-09.parquet
